@@ -28,10 +28,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun JetCompWeather_14Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
+fun JetCompWeather_14Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
