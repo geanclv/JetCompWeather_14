@@ -1,4 +1,4 @@
-package com.geancarloleiva.jetcompweather_14.screen
+package com.geancarloleiva.jetcompweather_14.screen.main
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

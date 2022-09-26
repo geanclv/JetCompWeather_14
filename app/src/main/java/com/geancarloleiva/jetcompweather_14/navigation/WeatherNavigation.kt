@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.geancarloleiva.jetcompweather_14.screen.WeatherMainScreen
-import com.geancarloleiva.jetcompweather_14.screen.WeatherSplashScreen
+import com.geancarloleiva.jetcompweather_14.screen.main.WeatherMainScreen
+import com.geancarloleiva.jetcompweather_14.screen.splash.WeatherSplashScreen
 
 @Composable
 fun WeatherNavigation() {

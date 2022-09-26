@@ -1,4 +1,4 @@
-package com.geancarloleiva.jetcompweather_14.screen
+package com.geancarloleiva.jetcompweather_14.screen.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
