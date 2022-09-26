@@ -15,7 +15,11 @@ import javax.inject.Inject
 class MainViewModel
 @Inject constructor(private val repository: WeatherRepository) : ViewModel() {
 
-    val data: MutableState<DataOrException<Weather, Boolean, Exception>> = mutableStateOf(
+    suspend fun getWeatherData(city: String): DataOrException<Weather, Boolean, Exception> {
+        return repository.getWeather(city)
+    }
+
+    /*val data: MutableState<DataOrException<Weather, Boolean, Exception>> = mutableStateOf(
         DataOrException(null, true, Exception(""))
     )
 
@@ -37,5 +41,5 @@ class MainViewModel
             if(data.value.data.toString().isNotEmpty())
                 data.value.loading = false
         }
-    }
+    }*/
 }
