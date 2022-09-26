@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">JetCompWeather_14</string>
+    <string name="app_name">Climate</string>
+    <string name="screen_splash_msg">You will find the sun</string>
 </resources>

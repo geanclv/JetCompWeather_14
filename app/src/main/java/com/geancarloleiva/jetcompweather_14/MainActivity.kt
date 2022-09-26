@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.geancarloleiva.jetcompweather_14.navigation.WeatherNavigation
 import com.geancarloleiva.jetcompweather_14.ui.theme.JetCompWeather_14Theme
@@ -33,7 +34,7 @@ fun WeatherAppInit() {
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
+            color = Color.White
         ) {
             Column(
                 verticalArrangement = Arrangement.Center,
