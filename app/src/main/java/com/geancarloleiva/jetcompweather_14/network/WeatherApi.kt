@@ -1,4 +1,4 @@
-package com.geancarloleiva.jetcompweather_14.navigation
+package com.geancarloleiva.jetcompweather_14.network
 
 import com.geancarloleiva.jetcompweather_14.model.Weather
 import com.geancarloleiva.jetcompweather_14.utils.Constants
