@@ -5,5 +5,8 @@ object Constants {
     const val API_URL = "data/2.5/forecast/daily"
     const val API_KEY = "ed60fcfbd110ee65c7150605ea8aceea"
 
+    const val API_IMG = "https://openweathermap.org/img/wn/"
+    const val API_IMG_EXT = ".png"
+
     const val UNIT_IMPERIAL = "imperial"
 }
