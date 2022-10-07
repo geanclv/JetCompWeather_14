@@ -8,5 +8,6 @@ object Constants {
     const val API_IMG = "https://openweathermap.org/img/wn/"
     const val API_IMG_EXT = ".png"
 
+    const val UNIT_METRIC = "metric"
     const val UNIT_IMPERIAL = "imperial"
 }

@@ -19,6 +19,8 @@ import coil.compose.rememberAsyncImagePainter
 import com.geancarloleiva.jetcompweather_14.data.DataOrException
 import com.geancarloleiva.jetcompweather_14.model.Weather
 import com.geancarloleiva.jetcompweather_14.utils.Constants
+import com.geancarloleiva.jetcompweather_14.utils.formatDate
+import com.geancarloleiva.jetcompweather_14.utils.formatDecimals
 import com.geancarloleiva.jetcompweather_14.viewmodel.main.MainViewModel
 import com.geancarloleiva.jetcompweather_14.widget.WeatherAppBar
 import java.time.LocalDateTime
@@ -74,9 +76,9 @@ fun MainScaffold(
 @Composable
 fun MainContent(data: Weather) {
     val firstData = data!!.list[0]
-    val currentDate = LocalDateTime.now()
+    /*val currentDate = LocalDateTime.now()
     val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-    val today = currentDate.format(formatter)
+    val today = currentDate.format(formatter)*/
     val imageUrl = "${Constants.API_IMG}${firstData.weather[0].icon}${Constants.API_IMG_EXT}"
 
     Column(
@@ -87,7 +89,7 @@ fun MainContent(data: Weather) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = today,
+            text = formatDate(firstData.dt),
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onSecondary,
             fontWeight = FontWeight.SemiBold,
@@ -107,7 +109,7 @@ fun MainContent(data: Weather) {
             ) {
                 WeatherStateImg(imageUrl = imageUrl)
                 Text(
-                    text = firstData.feels_like.day.toString(),
+                    text = formatDecimals(firstData.temp.day) + "°",
                     style = MaterialTheme.typography.h4,
                     fontWeight = FontWeight.ExtraBold
                 )
