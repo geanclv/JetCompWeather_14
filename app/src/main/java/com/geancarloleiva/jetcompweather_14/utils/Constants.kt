@@ -10,4 +10,6 @@ object Constants {
 
     const val UNIT_METRIC = "metric"
     const val UNIT_IMPERIAL = "imperial"
+
+    const val UNIT_KPH = "kph"
 }

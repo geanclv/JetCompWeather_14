@@ -3,4 +3,5 @@
     <string name="screen_splash_msg">You will find the sun</string>
     <string name="app_bar_search">Search</string>
     <string name="app_bar_menu">Menu</string>
+    <string name="app_weather_detail_title">This week</string>
 </resources>
