@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.geancarloleiva.jetcompweather_14.R
 import com.geancarloleiva.jetcompweather_14.navigation.WeatherScreens
+import com.geancarloleiva.jetcompweather_14.utils.Constants
 import kotlinx.coroutines.delay
 
 @Composable
@@ -49,7 +50,7 @@ fun WeatherSplashScreen(navController: NavController) {
         //Delay the next action
         delay(1500L)
         //Next action: call next screen
-        navController.navigate(route = WeatherScreens.MainScreen.name)
+        navController.navigate(route = "${WeatherScreens.MainScreen.name}/${Constants.DEFAULT_CITY}")
     })
 
     Surface(

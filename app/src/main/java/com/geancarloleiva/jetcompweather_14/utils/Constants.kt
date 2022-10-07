@@ -12,4 +12,6 @@ object Constants {
     const val UNIT_IMPERIAL = "imperial"
 
     const val UNIT_KPH = "kph"
+
+    const val DEFAULT_CITY = "lima"
 }

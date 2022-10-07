@@ -29,6 +29,7 @@ import com.geancarloleiva.jetcompweather_14.R
 import com.geancarloleiva.jetcompweather_14.data.DataOrException
 import com.geancarloleiva.jetcompweather_14.model.Weather
 import com.geancarloleiva.jetcompweather_14.model.WeatherItem
+import com.geancarloleiva.jetcompweather_14.navigation.WeatherScreens
 import com.geancarloleiva.jetcompweather_14.utils.Constants
 import com.geancarloleiva.jetcompweather_14.utils.formatDate
 import com.geancarloleiva.jetcompweather_14.utils.formatDateTime
@@ -42,14 +43,15 @@ import java.time.format.FormatStyle
 @Composable
 fun WeatherMainScreen(
     navController: NavController,
-    mainViewModel: MainViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel(),
+    city: String?
 ) {
     //Data in "state" mode: to be updated by coroutines when necessary
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)
     ) {
         //value = mainViewModel.data.value
-        value = mainViewModel.getWeatherData("Lima")
+        value = mainViewModel.getWeatherData(city.toString())
     }.value
 
     if (weatherData.loading == true) {
@@ -69,6 +71,9 @@ fun MainScaffold(
             WeatherAppBar(
                 title = "${weather.city.name}, ${weather.city.country}",
                 navController = navController,
+                onAddActionClicked = {
+                    navController.navigate(WeatherScreens.SearchScreen.name)
+                },
                 elevation = 3.dp,
                 //icon = Icons.Default.ArrowBack, //here only for example
                 //action called when in TopAppBar implementation. ID 27676 (just to find and reference)
