@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.geancarloleiva.jetcompweather_14.R
+import com.geancarloleiva.jetcompweather_14.navigation.WeatherScreens
 
 @Composable
 fun WeatherAppBar(
@@ -107,14 +108,13 @@ fun ShowSettingDropDownMenu(
     showDialog: MutableState<Boolean>,
     navController: NavController
 ) {
+    val menuItemAbout = stringResource(id = R.string.app_bar_menu_item_about)
+    val menuItemFavorite = stringResource(id = R.string.app_bar_menu_item_favorite)
+    val menuItemSettings = stringResource(id = R.string.app_bar_menu_item_settings)
     var expanded by remember {
         mutableStateOf(true)
     }
-    val items = listOf(
-        stringResource(id = R.string.app_bar_menu_item_about),
-        stringResource(id = R.string.app_bar_menu_item_favorite),
-        stringResource(id = R.string.app_bar_menu_item_settings)
-    )
+    val items = listOf(menuItemAbout, menuItemFavorite, menuItemSettings)
 
     Column(
         modifier = Modifier
@@ -138,12 +138,9 @@ fun ShowSettingDropDownMenu(
                 }) {
                     Icon(
                         imageVector = when (text) {
-                            stringResource(id = R.string.app_bar_menu_item_about)
-                            -> Icons.Default.Info
-                            stringResource(id = R.string.app_bar_menu_item_favorite)
-                            -> Icons.Default.FavoriteBorder
-                            stringResource(id = R.string.app_bar_menu_item_settings)
-                            -> Icons.Default.Settings
+                            menuItemAbout -> Icons.Default.Info
+                            menuItemFavorite -> Icons.Default.FavoriteBorder
+                            menuItemSettings -> Icons.Default.Settings
                             else -> Icons.Default.ArrowBack
                         },
                         contentDescription = stringResource(id = R.string.app_bar_menu),
@@ -152,7 +149,14 @@ fun ShowSettingDropDownMenu(
                     Text(
                         text = text,
                         modifier = Modifier.clickable {
-
+                            navController.navigate(
+                                when (text) {
+                                    menuItemAbout -> WeatherScreens.AboutScreen.name
+                                    menuItemFavorite -> WeatherScreens.FavoriteScreen.name
+                                    menuItemSettings -> WeatherScreens.SettingsScreen.name
+                                    else -> WeatherScreens.MainScreen.name
+                                }
+                            )
                         },
                         fontWeight = FontWeight.W300,
                         color = MaterialTheme.colors.onSecondary
