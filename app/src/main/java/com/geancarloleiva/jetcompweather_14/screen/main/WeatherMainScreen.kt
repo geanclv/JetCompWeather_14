@@ -36,9 +36,6 @@ import com.geancarloleiva.jetcompweather_14.utils.formatDateTime
 import com.geancarloleiva.jetcompweather_14.utils.formatDecimals
 import com.geancarloleiva.jetcompweather_14.viewmodel.main.MainViewModel
 import com.geancarloleiva.jetcompweather_14.widget.WeatherAppBar
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 @Composable
 fun WeatherMainScreen(
@@ -74,7 +71,7 @@ fun MainScaffold(
                 onAddActionClicked = {
                     navController.navigate(WeatherScreens.SearchScreen.name)
                 },
-                elevation = 3.dp,
+                elevation = 3.dp
                 //icon = Icons.Default.ArrowBack, //here only for example
                 //action called when in TopAppBar implementation. ID 27676 (just to find and reference)
                 /*onButtonClicked = {

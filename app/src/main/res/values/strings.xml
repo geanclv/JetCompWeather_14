@@ -9,4 +9,5 @@
     <string name="app_weather_detail_title">This week</string>
     <string name="app_about_title">Demo Weather App with Kotlin n Compose</string>
     <string name="app_about_content">App created by Geancarlo :)</string>
+    <string name="app_bar_delete">Delete</string>
 </resources>

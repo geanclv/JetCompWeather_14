@@ -1,5 +1,7 @@
 package com.geancarloleiva.jetcompweather_14.widget
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -10,17 +12,23 @@ import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.geancarloleiva.jetcompweather_14.R
+import com.geancarloleiva.jetcompweather_14.model.Favorite
 import com.geancarloleiva.jetcompweather_14.navigation.WeatherScreens
+import com.geancarloleiva.jetcompweather_14.viewmodel.favorite.FavoriteViewModel
+import kotlin.math.log
 
 @Composable
 fun WeatherAppBar(
@@ -29,6 +37,8 @@ fun WeatherAppBar(
     isMainScreen: Boolean = true,
     elevation: Dp = 0.dp,
     navController: NavController,
+    favoriteViewModel: FavoriteViewModel = hiltViewModel(),
+    isFavoriteCity: Boolean = false,
     onAddActionClicked: () -> Unit = {},
     onButtonClicked: () -> Unit = {}
 ) {
@@ -85,6 +95,42 @@ fun WeatherAppBar(
                         onButtonClicked.invoke()
                     })
             }
+            //validation to show Favorite icon
+            if (isMainScreen) {
+                val dataFav = title.split(",")
+                val favorite = Favorite(
+                    city = dataFav[0],
+                    country = dataFav[1]
+                )
+                if (isFavoriteCity) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
+                        modifier = Modifier
+                            .scale(0.9f)
+                            .clickable {
+                                deleteFavorite(
+                                    favoriteViewModel = favoriteViewModel,
+                                    favorite = favorite
+                                )
+                            },
+                        tint = Color.Red.copy(alpha = 0.6f)
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
+                        modifier = Modifier
+                            .scale(0.9f)
+                            .clickable {
+                                insertFavorite(
+                                    favoriteViewModel = favoriteViewModel,
+                                    favorite = favorite
+                                )
+                            }
+                    )
+                }
+            }
         },
         elevation = elevation,
         backgroundColor = Color.White
@@ -101,6 +147,22 @@ fun WeatherAppBar(
             )
         )
     }*/
+}
+
+fun insertFavorite(
+    favoriteViewModel: FavoriteViewModel,
+    favorite: Favorite
+) {
+    favoriteViewModel.createFavorite(favorite)
+    Log.e("GCLV", "insertFavorite: creado")
+}
+
+fun deleteFavorite(
+    favoriteViewModel: FavoriteViewModel,
+    favorite: Favorite
+) {
+    favoriteViewModel.deleteFavorite(favorite)
+    Log.e("GCLV", "deleteFavorite: eliminado")
 }
 
 @Composable
