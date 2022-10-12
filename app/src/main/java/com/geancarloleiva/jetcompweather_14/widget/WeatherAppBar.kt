@@ -121,7 +121,7 @@ fun WeatherAppBar(
                 var message = ""
                 //Icon filled if city is favorite, and option to delete
                 if (!cityInFavorite.isNullOrEmpty()) {
-                    message = stringResource(id = R.string.app_msg_fav_insert)
+                    message = stringResource(id = R.string.app_msg_fav_delete)
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
@@ -140,7 +140,7 @@ fun WeatherAppBar(
                 }
                 //Icon not filled if city is not favorite, and option to insert
                 else {
-                    message = stringResource(id = R.string.app_msg_fav_delete)
+                    message = stringResource(id = R.string.app_msg_fav_insert)
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
@@ -156,6 +156,7 @@ fun WeatherAppBar(
                             }
                     )
                 }
+                showIt.value = false
                 ShowToast(context, showIt, message)
             }
         },
@@ -182,7 +183,7 @@ fun ShowToast(
     showIt: MutableState<Boolean>,
     message: String
 ) {
-    if(showIt.value){
+    if (showIt.value) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
