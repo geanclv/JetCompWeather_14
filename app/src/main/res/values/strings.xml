@@ -10,4 +10,6 @@
     <string name="app_about_title">Demo Weather App with Kotlin n Compose</string>
     <string name="app_about_content">App created by Geancarlo :)</string>
     <string name="app_bar_delete">Delete</string>
+    <string name="app_msg_fav_insert">Favorite inserted ok</string>
+    <string name="app_msg_fav_delete">Favorite deleted ok</string>
 </resources>

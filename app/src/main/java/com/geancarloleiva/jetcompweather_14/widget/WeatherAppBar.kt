@@ -1,5 +1,6 @@
 package com.geancarloleiva.jetcompweather_14.widget
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -41,6 +42,7 @@ fun WeatherAppBar(
     onAddActionClicked: () -> Unit = {},
     onButtonClicked: () -> Unit = {}
 ) {
+    //start options menu
     val showDialog = remember {
         mutableStateOf(false)
     }
@@ -51,6 +53,14 @@ fun WeatherAppBar(
             navController = navController
         )
     }
+    //end options menu
+
+    //start toast
+    val showIt = remember {
+        mutableStateOf(false)
+    }
+    val context = LocalContext.current
+    //end toast
 
     TopAppBar(
         title = {
@@ -104,12 +114,14 @@ fun WeatherAppBar(
 
                 //validating if the city is favorite
                 val cityInFavorite = favoriteViewModel.favoriteLst
-                    .collectAsState().value.filter {item ->
+                    .collectAsState().value.filter { item ->
                         (item.city == favorite.city)
                     }
 
+                var message = ""
                 //Icon filled if city is favorite, and option to delete
                 if (!cityInFavorite.isNullOrEmpty()) {
+                    message = stringResource(id = R.string.app_msg_fav_insert)
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
@@ -119,13 +131,16 @@ fun WeatherAppBar(
                                 deleteFavorite(
                                     favoriteViewModel = favoriteViewModel,
                                     favorite = favorite
-                                )
+                                ).run {
+                                    showIt.value = true
+                                }
                             },
                         tint = Color.Red.copy(alpha = 0.6f)
                     )
                 }
                 //Icon not filled if city is not favorite, and option to insert
                 else {
+                    message = stringResource(id = R.string.app_msg_fav_delete)
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
@@ -135,10 +150,13 @@ fun WeatherAppBar(
                                 insertFavorite(
                                     favoriteViewModel = favoriteViewModel,
                                     favorite = favorite
-                                )
+                                ).run {
+                                    showIt.value = true
+                                }
                             }
                     )
                 }
+                ShowToast(context, showIt, message)
             }
         },
         elevation = elevation,
@@ -156,6 +174,17 @@ fun WeatherAppBar(
             )
         )
     }*/
+}
+
+@Composable
+fun ShowToast(
+    context: Context,
+    showIt: MutableState<Boolean>,
+    message: String
+) {
+    if(showIt.value){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
 }
 
 fun insertFavorite(
