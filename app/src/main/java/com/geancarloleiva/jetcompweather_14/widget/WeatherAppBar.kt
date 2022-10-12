@@ -38,7 +38,6 @@ fun WeatherAppBar(
     elevation: Dp = 0.dp,
     navController: NavController,
     favoriteViewModel: FavoriteViewModel = hiltViewModel(),
-    isFavoriteCity: Boolean = false,
     onAddActionClicked: () -> Unit = {},
     onButtonClicked: () -> Unit = {}
 ) {
@@ -102,7 +101,15 @@ fun WeatherAppBar(
                     city = dataFav[0],
                     country = dataFav[1]
                 )
-                if (isFavoriteCity) {
+
+                //validating if the city is favorite
+                val cityInFavorite = favoriteViewModel.favoriteLst
+                    .collectAsState().value.filter {item ->
+                        (item.city == favorite.city)
+                    }
+
+                //Icon filled if city is favorite, and option to delete
+                if (!cityInFavorite.isNullOrEmpty()) {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
@@ -116,7 +123,9 @@ fun WeatherAppBar(
                             },
                         tint = Color.Red.copy(alpha = 0.6f)
                     )
-                } else {
+                }
+                //Icon not filled if city is not favorite, and option to insert
+                else {
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.app_bar_menu_item_favorite),
