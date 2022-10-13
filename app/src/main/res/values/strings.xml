@@ -12,4 +12,5 @@
     <string name="app_bar_delete">Delete</string>
     <string name="app_msg_fav_insert">Favorite inserted ok</string>
     <string name="app_msg_fav_delete">Favorite deleted ok</string>
+    <string name="app_settings_title">Change units of measure</string>
 </resources>

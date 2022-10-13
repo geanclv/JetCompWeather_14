@@ -7,11 +7,13 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.geancarloleiva.jetcompweather_14.model.Favorite
+import com.geancarloleiva.jetcompweather_14.model.MetricUnit
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WeatherDao {
 
+    //CRUD for Favorite
     @Query("SELECT * FROM tbl_favorite")
     fun getFavorites(): Flow<List<Favorite>>
 
@@ -29,4 +31,20 @@ interface WeatherDao {
 
     @Query("DELETE FROM tbl_favorite")
     suspend fun deleteAllFavorites()
+
+    //CRUD for MetricUnit
+    @Query("SELECT * FROM tbl_settings")
+    fun getMetricUnits(): Flow<List<MetricUnit>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun createMetricUnit(metricUnit: MetricUnit)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateMetricUnit(metricUnit: MetricUnit)
+
+    @Delete
+    suspend fun deleteMetricUnit(metricUnit: MetricUnit)
+
+    @Query("DELETE FROM tbl_settings")
+    suspend fun deleteAllMetricUnits()
 }
