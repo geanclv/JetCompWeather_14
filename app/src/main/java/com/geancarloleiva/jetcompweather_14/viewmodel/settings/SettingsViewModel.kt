@@ -23,13 +23,14 @@ class SettingsViewModel @Inject constructor(
     val settingsLst = _settingsLst.asStateFlow()
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch() {
             repository.getMetricUnits()
                 .distinctUntilChanged()
                 .collect { lst ->
                     if(lst.isNullOrEmpty()){
                         Log.e("GCLV", "Sin data de MetricUnits", )
                     } else {
+                        Log.e("GCLV", "Con data de MetricUnits", )
                         _settingsLst.value = lst
                     }
                 }
@@ -38,6 +39,7 @@ class SettingsViewModel @Inject constructor(
 
     fun createMetricUnit(metricUnit: MetricUnit) {
         viewModelScope.launch {
+            Log.e("GCLV", "createMetricUnit: $metricUnit", )
             repository.createMetricUnit(metricUnit)
         }
     }
@@ -56,6 +58,7 @@ class SettingsViewModel @Inject constructor(
 
     fun deleteAllMetricUnits() {
         viewModelScope.launch {
+            Log.e("GCLV", "deleteAllMetricUnits: exec", )
             repository.deleteAllMetricUnits()
         }
     }

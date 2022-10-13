@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,20 +36,25 @@ import com.geancarloleiva.jetcompweather_14.utils.formatDate
 import com.geancarloleiva.jetcompweather_14.utils.formatDateTime
 import com.geancarloleiva.jetcompweather_14.utils.formatDecimals
 import com.geancarloleiva.jetcompweather_14.viewmodel.main.MainViewModel
+import com.geancarloleiva.jetcompweather_14.viewmodel.settings.SettingsViewModel
 import com.geancarloleiva.jetcompweather_14.widget.WeatherAppBar
 
 @Composable
 fun WeatherMainScreen(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
     city: String?
 ) {
+    val unitFromDb = settingsViewModel.settingsLst.collectAsState().value
+    val unit = if(unitFromDb.isNullOrEmpty()) Constants.UNIT_METRIC else unitFromDb[0].unit
+    Log.e("GCLV", "unit: $unit", )
     //Data in "state" mode: to be updated by coroutines when necessary
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)
     ) {
         //value = mainViewModel.data.value
-        value = mainViewModel.getWeatherData(city.toString())
+        value = mainViewModel.getWeatherData(city.toString(), unit)
     }.value
 
     if (weatherData.loading == true) {

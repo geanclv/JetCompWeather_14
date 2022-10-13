@@ -47,19 +47,15 @@ fun WeatherNavigation() {
             }
         }
         composable(WeatherScreens.SearchScreen.name) {
-            //viewmodel
             WeatherSearchScreen(navController = navController)
         }
         composable(WeatherScreens.AboutScreen.name) {
-            //viewmodel
             WeatherAboutScreen(navController = navController)
         }
         composable(WeatherScreens.FavoriteScreen.name) {
-            //viewmodel
             WeatherFavoriteScreen(navController = navController)
         }
         composable(WeatherScreens.SettingsScreen.name) {
-            //viewmodel
             WeatherSettingsScreen(navController = navController)
         }
     }

@@ -24,6 +24,9 @@ import com.geancarloleiva.jetcompweather_14.model.MetricUnit
 import com.geancarloleiva.jetcompweather_14.utils.Constants
 import com.geancarloleiva.jetcompweather_14.viewmodel.settings.SettingsViewModel
 import com.geancarloleiva.jetcompweather_14.widget.WeatherAppBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 
 @Composable
 fun WeatherSettingsScreen(
@@ -103,7 +106,6 @@ fun WeatherSettingsScreen(
                 Button(
                     onClick = {
                         settingsViewModel.deleteAllMetricUnits()
-                        Log.e("GCLV", "Actual metric $choiceState")
                         settingsViewModel.createMetricUnit(MetricUnit(choiceState))
                     },
                     modifier = Modifier
